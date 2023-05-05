@@ -1,0 +1,26 @@
+.header {
+    display: flex;
+    position: sticky;
+    top: 0;
+    justify-content: space-between;
+    background-color: black;
+    z-index: 900;
+}
+
+.title-logo {
+    display: flex;
+}
+
+.reelLogo {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    width: 60px;
+}
+
+.menuIcon {
+    padding-left: 0.75rem;
+}
+
+.headerTitle {
+    font-family: Bodoni MT, serif;
+}

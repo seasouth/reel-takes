@@ -1,0 +1,13 @@
+:root {
+  min-height: 100vh;
+  text-align: center;
+  height: 100%;
+  /* background-color: darkslategray; */
+  background-color: rgb(46, 66, 45);
+}
+
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0px;
+}

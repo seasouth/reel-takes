@@ -1,0 +1,68 @@
+.commentsHeader {
+    display: flex;
+    color: whitesmoke;
+    padding-left: 6px;
+}
+
+.newComment {
+    text-align: left;
+    width: 100%;
+}
+
+.threadLine {
+    border-left: 3px solid teal;
+    position: relative;
+    height: 100%;
+    top: 0;
+}
+
+.sendButton {
+    padding-bottom: 1rem;
+}
+
+.btnClose {
+    display: flex;
+    padding: 6px !important;
+}
+
+.comment {
+    border-width: 2px;
+    width: 100%;
+}
+
+.commentIndent {
+    width: 2rem;
+    border-width: 2px;
+}
+
+.commentInner {
+    padding: 5px;
+}
+
+.commentHeading {
+    display: flex;
+}
+
+.commentAuthor {
+    display: flex;
+    /* padding: 2px; */
+    padding-left: 4px;
+    color: #faaf00;
+}
+
+.commentText {
+    color: whitesmoke;
+    display: flex;
+    padding: 4px;
+    overflow-wrap: anywhere;
+    text-align: left;
+}
+
+.commentMenu {
+    display: flex;
+    padding-top: 4px;
+}
+
+.commentMenuItem {
+    padding: 4px;
+}
