@@ -12,6 +12,7 @@ const Comment = ({
     username,
     commentText,
     itemid,
+    threadtype,
     updateComments
 }) => {
     const [replyToOpen, setReplyToOpen] = useState(false);
@@ -39,12 +40,11 @@ const Comment = ({
                     style={{display: 'flex'}}
                 >{
                     [...Array(details.numIndentations)].map(() =>
-
-                        <>
+                        <React.Fragment key={details.id}>
                             <div style={{width: '0.75rem'}} />
                             <div className={styles.threadLine} />
                             <div style={{width: '0.75rem'}} />
-                        </>
+                        </React.Fragment>
                     )
                 }</div>
 
@@ -91,6 +91,7 @@ const Comment = ({
                         openReply={replyToOpen}
                         onSubmit={handleOnSubmit}
                         itemId={itemid}
+                        threadType={threadtype}
                         handleOnReplyButton={handleOnReplyButton}
                     />
                 }

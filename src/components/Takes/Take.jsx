@@ -20,6 +20,7 @@ const Take = ({
     parentId,
     openReply,
     itemId,
+    threadType,
     onSubmit
 }) => {
     const [text, setText] = useState("");
@@ -29,6 +30,7 @@ const Take = ({
             commenter: "Anonymous",
             commenttext: text,
             threadid: itemId,
+            threadtype: threadType,
             parentid: parentId
         }
 

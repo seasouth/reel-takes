@@ -8,17 +8,18 @@ datasource db {
 }
 
 model comments {
-  id             String        @id @default(cuid())
-  commentid      String?       @db.VarChar(255)
-  commenttext    String?       @db.VarChar(255)
-  commenter      String?       @db.VarChar(255)
-  numratings     Int?          @default(0)
-  rating         Float?        @default(0)
-  threadid       String?       @db.VarChar(255)
-  timestamp      DateTime?     @default(now())
-  submitdatetime String?       @db.VarChar(255)
-  parentid       String?       @db.VarChar(255)
+  id             String    @id @default(cuid())
+  commentid      String?   @db.VarChar(255)
+  commenttext    String?   @db.VarChar(255)
+  commenter      String?   @db.VarChar(255)
+  numratings     Int?      @default(0)
+  rating         Float?    @default(0)
+  threadid       String?   @db.VarChar(16)
+  timestamp      DateTime? @default(now())
+  submitdatetime String?   @db.VarChar(255)
+  parentid       String?   @db.VarChar(255)
   commenterid    String?
+  threadtype     String?   @db.VarChar(16)
 }
 
 model Account {
