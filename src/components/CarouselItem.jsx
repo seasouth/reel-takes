@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Card from '@mui/material/Card'
 import Badge from '@mui/material/Badge'
 import CardContent from '@mui/material/CardContent'
@@ -11,9 +11,23 @@ import StarIcon from '@mui/icons-material/Star'
 import styles from '@/styles/Home.module.css'
 
 const CarouselItem = ({
-    image,
-    footer
+    item,
+    image
 }) => {
+    const [length, setLength] = useState(0);
+
+    useEffect( () => {
+        async function fetchData() {
+            const retValue = await fetch(`/api/get/comment/${item.media_type}/${item.id}`);
+            const updatedComments = await retValue.json();
+            setLength(updatedComments.length);
+        }
+
+        if (item) {
+            fetchData();
+        }
+    }, [item]);
+
     return (
         <Card>
             <CardActionArea>
@@ -31,7 +45,7 @@ const CarouselItem = ({
                         readOnly
                         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                     />
-                    <Badge badgeContent={4} color="primary">
+                    <Badge badgeContent={length} color="primary">
                         <CommentIcon style={{color: "white"}} />
                     </Badge>
                 </CardContent>

@@ -27,10 +27,6 @@ export default function StarRating({
   const [value, setValue] = useState(0);
   const [hover, setHover] = useState(-1);
 
-  useEffect(() => {
-    console.log(details);
-  }, []);
-
   const handleChange = async (e, nv) => {
     console.log(e, nv);
     setValue(nv);
