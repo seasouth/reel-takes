@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GetServerSideProps } from "next";
 import { useRouter } from 'next/router'
-import { connect } from 'react-redux';
 import prisma from '@/lib/prisma';
-import CancelIcon from '@mui/icons-material/Cancel';
 
-import { axiosGet, axiosTMDBGet } from '@/src/hooks/useAxios';
+import { axiosTMDBGet } from '@/src/hooks/useAxios';
 import Take from '@/src/components/Takes/Take';
 import Comment from '@/src/components/Takes/Comment';
 
@@ -50,67 +47,33 @@ const Takes = ({
     const { mediatype, itemid } = router.query;
 
     useEffect(() => {
-        //if (!imageRef.current || !contentRef.current) return;
-
         setReplyToOpen(false);
         if (commentsList.length > 0) {
             setComments(orderComments(commentsList, null));
         }
-        /**
-        axiosTMDBGet(`${mediatype}/${itemid}/images`).then((response) => {
-            setLogo(response?.data?.logos[0]?.file_path);
-        });
-        */
+
         axiosTMDBGet(`${mediatype}/${itemid}`).then((response) => {
             console.log(response);
             setLogo(response?.data?.backdrop_path);
-            //setLogo(response?.data?.logos[0]?.file_path);
         });
-        /**
-        function handleScroll() {
-            const scrollPercentage = (window.scrollY / window.innerHeight) * 100;
-            setScrollPosition(scrollPercentage);
-          }
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
 
         function handleScroll() {
-            const contentRect = contentRef.current.getBoundingClientRect();
-            const contentHeight = contentRef.current.scrollHeight;
-            const scrollPercentage = (window.scrollY / window.innerHeight) * 100;
-            setScrollPosition(scrollPercentage);
-            const opacityValue = 1 - scrollPercentage; // Invert scroll percentage to get opacity
-            imageRef.current.style.opacity = opacityValue;
-        }
-        */
-      
-        function handleScroll() {
             const scrollPercentage = 1 - (window.scrollY / window.innerHeight);
-            const opacityValue = (scrollPercentage * 0.75) - 0.5; // Invert scroll percentage to get opacity
-            //const opacityValue = Math.pow(scrollPercentage, 0.5);
-            console.log(opacityValue);
+            const blurPercentage = (window.scrollY / window.innerHeight) * 100;
+            const opacityValue = (scrollPercentage * 0.75) - 0.5;
             if (opacityValue >= 0.05) {
                 imageRef.current.style.opacity = opacityValue;
+                imageRef.current.style.filter = `blur(${blurPercentage}px)`;
             }
         }
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-
-        contentRef.current.addEventListener('scroll', handleScroll);
-        return () => contentRef.current.removeEventListener('scroll', handleScroll);
     }, []);
 
     useEffect(() => {
         if (imageRef.current) {
-            /**
-            console.log(scrollPosition)
-            //const blurValue = (scrollPosition / 100) * 50; // Adjust this to your liking
-            //imageRef.current.style.filter = `blur(${blurValue}px)`;
-            const opacityValue = 1 - contentRect.y / (contentHeight - window.innerHeight);
-            imageRef.current.style.opacity = blurValue;
-            */
-            const opacityValue = 1 - scrollPosition; // Invert scroll percentage to get opacity
+            const opacityValue = 1 - scrollPosition;
             imageRef.current.style.opacity = opacityValue;
 
         }
@@ -125,25 +88,19 @@ const Takes = ({
 
     const orderComments = (list) => {
         let orderedComments = [];
-
         const nestedOrderComments = (nestedList, indentations) => {
-
-            nestedList.sort((a, b) => a.rating - b.rating).map((comment) => {
+            nestedList.sort((a, b) => b.rating - a.rating).map((comment) => {
                 let updatedComment = comment;
                 updatedComment = { ...updatedComment, numIndentations: indentations}
-
                 orderedComments.push(updatedComment);
-
                 nestedOrderComments(list.filter((nestedComment) => nestedComment.parentid === comment.id), indentations + 1);
             })
         }
 
-        list.filter((comment) => !comment.parentid).sort((a, b) => a.rating - b.rating).map((comment) => {
+        list.filter((comment) => !comment.parentid).sort((a, b) => b.rating - a.rating).map((comment) => {
             let updatedComment = comment;
             updatedComment = { ...updatedComment, numIndentations: 0}
-
             orderedComments.push(updatedComment);
-
             nestedOrderComments(list.filter((nestedComment) => nestedComment.parentid === comment.id), 1);
         });
 
@@ -172,6 +129,14 @@ const Takes = ({
                 ref={contentRef}
             >
                 <h1 className={styles.commentsHeader}>Comments: </h1>
+                <Take
+                    className={styles.newComment}
+                    parentId={null}
+                    openReply
+                    itemId={itemid}
+                    threadType={mediatype}
+                    onSubmit={updateComments}
+                />
                 {
                     comments.map((comment) =>
                     <Comment
@@ -186,14 +151,6 @@ const Takes = ({
                     />
                     )
                 }
-                <Take
-                    className={styles.newComment}
-                    parentId={null}
-                    openReply
-                    itemId={itemid}
-                    threadType={mediatype}
-                    onSubmit={updateComments}
-                />
             </div>
         </div>
     )
