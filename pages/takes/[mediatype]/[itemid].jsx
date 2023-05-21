@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import { useRouter } from 'next/router'
 import prisma from '@/lib/prisma';
 
@@ -47,6 +50,7 @@ const Takes = ({
     const { mediatype, itemid } = router.query;
 
     useEffect(() => {
+        console.log(window.innerWidth);
         setReplyToOpen(false);
         if (commentsList.length > 0) {
             setComments(orderComments(commentsList, null));
@@ -54,7 +58,11 @@ const Takes = ({
 
         axiosTMDBGet(`${mediatype}/${itemid}`).then((response) => {
             console.log(response);
-            setLogo(response?.data?.backdrop_path);
+            if (window.innerWidth > 500) {
+                setLogo(response?.data?.backdrop_path);
+            } else {
+                setLogo(response?.data?.poster_path);
+            }
         });
 
         function handleScroll() {
@@ -118,6 +126,14 @@ const Takes = ({
             <div
                 className={styles.imageContainer}
             >
+                <IconButton 
+                    aria-label="close" 
+                    size="large"
+                    onClick={() => router.replace('/')}
+                    sx={{display: 'flex'}}
+                >
+                    <CancelRoundedIcon color="white" fontSize="inherit" />
+                </IconButton>
                 {logo && <img
                     className={styles.image}
                     ref={imageRef}
