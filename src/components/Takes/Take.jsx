@@ -42,6 +42,7 @@ const Take = ({
             })
             if (onSubmit) {
                 console.log("on submit");
+                setText("");
                 await onSubmit();
             }
         } catch (err) {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import Button from '@mui/material/Button';
 import StarRating from '@/src/components/Takes/StarRating';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -70,17 +69,15 @@ const Comment = ({
                             details={details}
                             updateComments={updateComments}
                         />
-                        <br />
-                        <div 
-                            style={{padding: '2px'}} 
+                        <Button
+                            onClick={handleOnClick}
+                            sx={{
+                                color: 'whitesmoke',
+                                marginBottom: '5px'
+                            }}
                         >
-                            <Button
-                                onClick={handleOnClick}
-                                color="primary"
-                            >
-                                Reply
-                            </Button>
-                        </div>
+                            Reply
+                        </Button>
                     </div>
                 </div>
                 {

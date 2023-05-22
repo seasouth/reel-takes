@@ -42,15 +42,10 @@ const DashboardHeader = () => {
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar position="static">
                     <Toolbar>
-                        <div
-                            className={styles.menuIcon}
-                        >
-                            <MenuIcon />
-                        </div>
                         <Image
                             src="/reel.svg"
                             alt="Reel Logo"
-                            width={100}
+                            width={50}
                             height={24}
                             priority
                         />

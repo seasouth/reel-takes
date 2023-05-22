@@ -51,7 +51,7 @@ const Takes = ({
 
     useEffect(() => {
         console.log(window.innerWidth);
-        setReplyToOpen(false);
+        setReplyToOpen(replyToOpen ? false : true);
         if (commentsList.length > 0) {
             setComments(orderComments(commentsList, null));
         }
@@ -79,16 +79,7 @@ const Takes = ({
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    useEffect(() => {
-        if (imageRef.current) {
-            const opacityValue = 1 - scrollPosition;
-            imageRef.current.style.opacity = opacityValue;
-
-        }
-    }, [scrollPosition]);
-
     const updateComments = async () => {
-        console.log(itemid)
         const retValue = await fetch(`/api/get/comment/${mediatype}/${itemid}`)
         const updatedComments = retValue.json();
         setComments(orderComments(await updatedComments));
@@ -132,7 +123,7 @@ const Takes = ({
                     onClick={() => router.replace('/')}
                     sx={{display: 'flex'}}
                 >
-                    <CancelRoundedIcon color="white" fontSize="inherit" />
+                    <CancelRoundedIcon fontSize="inherit" sx={{color: 'whitesmoke'}} />
                 </IconButton>
                 {logo && <img
                     className={styles.image}
