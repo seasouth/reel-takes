@@ -48,7 +48,7 @@ export default function StarRating({
     <Box
       textAlign="left"
       sx={{
-        width: 200,
+        paddingTop: '6px',
         display: 'flex',
         alignItems: 'left',
       }}
@@ -58,15 +58,13 @@ export default function StarRating({
         value={details.rating}
         precision={0.5}
         getLabelText={getLabelText}
+        size="xsmall"
         onChange={handleChange}
         onChangeActive={(event, newHover) => {
           setHover(newHover);
         }}
         //emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
       />
-      {value !== null && (
-        <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-      )}
     </Box>
   );
 }

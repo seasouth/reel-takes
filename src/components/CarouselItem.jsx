@@ -7,6 +7,27 @@ import CommentIcon from '@mui/icons-material/Comment'
 import { CardActionArea } from '@mui/material'
 import Rating from '@mui/material/Rating'
 import StarIcon from '@mui/icons-material/Star'
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+    components: {
+      MuiRating: {
+        styleOverrides: {
+          root: {
+            fontSize: '0.95rem',
+            paddingTop: '4px'
+          }
+        }
+      },
+      MuiSvgIcon: {
+        styleOverrides: {
+            root: {
+                fontSize: '1rem'
+            }
+        }
+      }
+    }
+});
 
 const CarouselItem = ({
     item,
@@ -14,6 +35,18 @@ const CarouselItem = ({
 }) => {
     const [length, setLength] = useState(0);
     const [avgRating, setAvgRating] = useState(0);
+    const [cardPadding, setCardPadding] = useState('12px');
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        if (window.innerWidth > 500) {
+            setIsMobile(false);
+            setCardPadding('12px');
+        } else {
+            setIsMobile(true);
+            setCardPadding('2px');
+        }
+    }, []);
 
     useEffect(() => {
         async function fetchData() {
@@ -41,8 +74,25 @@ const CarouselItem = ({
                     image={image}
                 />
                 <CardContent
-                    sx={{ display: 'flex', justifyContent: 'space-between', padding: '12px' }}
+                    sx={{ 
+                        display: isMobile ? 'contents' : 'flex', 
+                        justifyContent: 'space-between', 
+                        paddingLeft: isMobile ? '4px' : '12px',
+                        paddingTop: isMobile ? '2px' : '',
+                    }}
                 >
+                    <>
+                    {isMobile ? <ThemeProvider theme={theme}>
+                        <Rating
+                            name="reel-rating"
+                            size="small"
+                            value={avgRating}
+                            precision={0.5}
+                            readOnly
+                            emptyIcon={<StarIcon style={{ opacity: 0.55, color: 'whitesmoke' }} fontSize="inherit" />}
+                        />
+                    </ThemeProvider>
+                    :
                     <Rating
                         name="reel-rating"
                         size="small"
@@ -50,10 +100,20 @@ const CarouselItem = ({
                         precision={0.5}
                         readOnly
                         emptyIcon={<StarIcon style={{ opacity: 0.55, color: 'whitesmoke' }} fontSize="inherit" />}
-                    />
+                    />}
+                    </>
+                    <>
+                    {isMobile ? 
+                    <ThemeProvider theme={theme}>
+                        <Badge badgeContent={length} color="primary">
+                            <CommentIcon style={{color: "white"}} />
+                        </Badge>
+                    </ThemeProvider>
+                    :
                     <Badge badgeContent={length} color="primary">
                         <CommentIcon style={{color: "white"}} />
-                    </Badge>
+                    </Badge>}
+                    </>
                 </CardContent>
             </CardActionArea>
         </Card>
