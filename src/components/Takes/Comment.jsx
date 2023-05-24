@@ -18,7 +18,6 @@ const Comment = ({
 
     const handleOnClick = (e) => {
         setReplyToOpen(replyToOpen ? false : true);
-        console.log(details);
     }
 
     const handleOnReplyButton = (e) => {

@@ -18,7 +18,6 @@ const Carousel = ({
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        console.log(tmdbQuery, title);
         if (tmdbQuery?.length > 0) {
             if (queryParams) {
                 axiosTMDBGet(tmdbQuery, `&query=${queryParams}`).then((response) => {
@@ -41,6 +40,7 @@ const Carousel = ({
             <h4 className={styles.swiperTitle}>{title}</h4>
             {<div className={styles.swiperCarousel}>
                 {<Swiper
+                    key={title}
                     modules={[FreeMode, Navigation, Pagination]}
                     slidesPerView={6}
                     slidesPerGroupSkip={3}

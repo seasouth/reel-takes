@@ -50,14 +50,12 @@ const Takes = ({
     const { mediatype, itemid } = router.query;
 
     useEffect(() => {
-        console.log(window.innerWidth);
         setReplyToOpen(replyToOpen ? false : true);
         if (commentsList.length > 0) {
             setComments(orderComments(commentsList, null));
         }
 
         axiosTMDBGet(`${mediatype}/${itemid}`).then((response) => {
-            console.log(response);
             if (window.innerWidth > 500) {
                 setLogo(response?.data?.backdrop_path);
             } else {

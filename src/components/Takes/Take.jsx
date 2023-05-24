@@ -41,7 +41,6 @@ const Take = ({
                 body: JSON.stringify(comment)
             })
             if (onSubmit) {
-                console.log("on submit");
                 setText("");
                 await onSubmit();
             }

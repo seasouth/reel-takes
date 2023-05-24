@@ -73,8 +73,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const DashboardHeader = () => {
     const [searchValue, setSearchValue] = useStore((state) => [state.searchValue, state.setSearchValue]);
-    //const [showSearchResults, setShowSearchResults] = useStore((state) => [state.showSearchResults, state.setShowSearchResults]);
-    const setShowSearchResults = useStore((state) => state.setShowSearchResults);
+    const [showSearchResults, setShowSearchResults] = useStore((state) => [state.showSearchResults, state.setShowSearchResults]);
+    //const setShowSearchResults = useStore((state) => state.setShowSearchResults);
+
+    useEffect(() => {
+        if (showSearchResults && searchValue?.length === 0) {
+            setShowSearchResults(false);
+        }
+    }, [searchValue]);
 
     const handleChange = (e) => {
         setSearchValue(e.target.value);
@@ -82,9 +88,13 @@ const DashboardHeader = () => {
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
-            console.log(searchValue);
-
             setShowSearchResults(true);
+        }
+    }
+
+    const handleBlur = () => {
+        if (showSearchResults && searchValue?.length === 0) {
+            setShowSearchResults(false);
         }
     }
 
@@ -114,6 +124,7 @@ const DashboardHeader = () => {
                                     value={searchValue}
                                     onChange={handleChange}
                                     onKeyDown={handleKeyDown}
+                                    onBlur={handleBlur}
                                 />
                             </Search>
                         </div>
