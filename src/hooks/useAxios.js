@@ -6,7 +6,6 @@ const TMDB_API_KEY = 'f13366d7e39e24b8870e5dc2937769c9';
 
 export const axiosGet = (endpoint) => {
     let path = BASE_URL + endpoint;
-    console.log(path);
     return axios.get(path);
 }
 
@@ -24,8 +23,5 @@ export const axiosTMDBGet = (endpoint, params) => {
 
 export const axiosPost = (endpoint, data) => {
     let path = BASE_URL + endpoint;
-    console.log(endpoint);
-    console.log(data);
-    console.log(path);
     return axios.post(path, data);
 }

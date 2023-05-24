@@ -10,10 +10,10 @@ const HomePage = () => {
     return (
         <>{
             showSearchResults && searchValue.length > 0 ?
-                <>
+                <React.Fragment key={'search'}>
                     <Carousel
                         title={'Search Results'}
-                        tmdbQuery={'search/movie'}
+                        tmdbQuery={'search/multi'}
                         queryParams={searchValue}
                     />
                     <br />
@@ -29,7 +29,7 @@ const HomePage = () => {
                             priority
                         />
                     </footer>
-                </>
+                </ React.Fragment>
                 :
                 <>
                     <Carousel 

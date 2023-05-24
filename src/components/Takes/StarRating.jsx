@@ -28,7 +28,6 @@ export default function StarRating({
   const [hover, setHover] = useState(-1);
 
   const handleChange = async (e, nv) => {
-    console.log(e, nv);
     setValue(nv);
 
     const results = await fetch(`/api/update/comment`, {
