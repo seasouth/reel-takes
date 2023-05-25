@@ -54,7 +54,10 @@
 }
 
 .sendButton {
-    padding-bottom: 1rem;
+    display: flex;
+    /* padding-bottom: 1rem; */
+    align-items: center;
+    justify-content: space-between;
 }
 
 .btnClose {
@@ -84,6 +87,7 @@
     display: flex;
     /* padding: 2px; */
     padding-left: 4px;
+    padding-right: 6px;
     color: #faaf00;
 }
 

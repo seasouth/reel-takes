@@ -15,6 +15,7 @@ const Comment = ({
     updateComments
 }) => {
     const [replyToOpen, setReplyToOpen] = useState(false);
+    const msg = " gives it a ";
 
     const handleOnClick = (e) => {
         setReplyToOpen(replyToOpen ? false : true);
@@ -49,17 +50,19 @@ const Comment = ({
             }
             <div className={styles.comment}>
                 <div className={styles.commentInner}>
-                    { username ? 
-                    <div className={styles.commentAuthor}>
-                        {username}
-                    </div>
-                    :
                     <div className={styles.commentHeading}>
                         <AccountCircleIcon 
                             sx={{color: 'khaki'}}
                         />
                         <div className={styles.commentAuthor}>Anonymous</div>
-                    </div>}
+                        <div style={{color: 'whitesmoke'}}>{msg}</div>
+                        <div style={{paddingBottom: '6px', paddingLeft: '6px'}}>
+                            <StarRating
+                                details={details}
+                                type="media"
+                            />
+                        </div>
+                    </div>
                     <div className={styles.commentText}>
                         {commentText}
                     </div>
@@ -67,6 +70,7 @@ const Comment = ({
                         <StarRating 
                             details={details}
                             updateComments={updateComments}
+                            type="comment"
                         />
                         <Button
                             onClick={handleOnClick}

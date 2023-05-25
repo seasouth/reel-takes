@@ -55,7 +55,7 @@ const CarouselItem = ({
 
             if (updatedComments.length > 0) {
                 setLength(updatedComments.length);
-                const avgRating = updatedComments.reduce((a, b) => a + b.rating, 0) / updatedComments.length;
+                const avgRating = updatedComments.reduce((a, b) => a + b.mediarating, 0) / updatedComments.length;
                 setAvgRating(avgRating);
             }
         }

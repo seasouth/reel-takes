@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router'
-import { ThemeProvider, createTheme, styled, alpha } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { AppBar, InputBase, TextField, Toolbar, Typography, Box, Button, ButtonGroup } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { connect } from 'react-redux';
 import { logoutUser } from '@/src/reducer/auth/authActions';
+import DashboardSearch from '@/src/components/DashboardSearch';
 import NewUser from '@/src/components/User/NewUser';
 import Login from '@/src/components/User/Login';
 import { useStore } from '@/src/hooks/useStore'
@@ -34,69 +35,7 @@ const theme = createTheme({
     }
 });
 
-const Search = styled('div')(({ theme }) => ({
-    display: 'flex',
-    position: 'relative',
-    borderRadius: '8px',
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    transition: theme.transitions.create('width'),
-    width: '30%',
-    '&:focus-within': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-      transition: theme.transitions.create('width'),
-      width: '60%'
-    },
-    marginLeft: 0,
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    paddingLeft: '8px',
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-  
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(2.5)})`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
-
-    },
-}));
-
 const DashboardHeader = () => {
-    const [searchValue, setSearchValue] = useStore((state) => [state.searchValue, state.setSearchValue]);
-    const [showSearchResults, setShowSearchResults] = useStore((state) => [state.showSearchResults, state.setShowSearchResults]);
-    //const setShowSearchResults = useStore((state) => state.setShowSearchResults);
-
-    useEffect(() => {
-        if (showSearchResults && searchValue?.length === 0) {
-            setShowSearchResults(false);
-        }
-    }, [searchValue]);
-
-    const handleChange = (e) => {
-        setSearchValue(e.target.value);
-    }
-
-    const handleKeyDown = (e) => {
-        if (e.key === "Enter") {
-            setShowSearchResults(true);
-        }
-    }
-
-    const handleBlur = () => {
-        if (showSearchResults && searchValue?.length === 0) {
-            setShowSearchResults(false);
-        }
-    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -114,19 +53,7 @@ const DashboardHeader = () => {
                             <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'left'}}>
                                 <div className={styles.headerTitle}>Reel Takes</div>
                             </Typography>
-                            <Search>
-                                <SearchIconWrapper>
-                                    <SearchIcon />
-                                </SearchIconWrapper>
-                                <StyledInputBase
-                                    placeholder="Search…"
-                                    inputProps={{ 'aria-label': 'search' }}
-                                    value={searchValue}
-                                    onChange={handleChange}
-                                    onKeyDown={handleKeyDown}
-                                    onBlur={handleBlur}
-                                />
-                            </Search>
+                            <DashboardSearch />
                         </div>
                     </Toolbar>
                 </AppBar>
