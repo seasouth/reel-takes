@@ -6,6 +6,7 @@ import SendIcon from '@mui/icons-material/Send';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
+import StarRating from './StarRating';
 
 import styles from '@/styles/Comments.module.css'
 
@@ -24,11 +25,13 @@ const Take = ({
     onSubmit
 }) => {
     const [text, setText] = useState("");
+    const [mediaRating, setMediaRating] = useState(0);
 
     const submitComment = async () => {
         let comment = {
             commenter: "Anonymous",
             commenttext: text,
+            mediarating: mediaRating,
             threadid: itemId,
             threadtype: threadType,
             parentid: parentId
@@ -68,8 +71,18 @@ const Take = ({
                             endAdornment:
                                 <InputAdornment position="end">
                                     <div
-                                        className={styles.SendButton}
+                                        className={styles.sendButton}
                                     >
+                                        <div style={{color: '#929180'}}>
+                                            Rate it?
+                                        </div>
+                                        <div style={{paddingBottom: '6px', paddingLeft: '6px'}}>
+                                            <StarRating
+                                                //details={details}
+                                                type="take"
+                                                setRating={setMediaRating}
+                                            />
+                                        </div>
                                         <IconButton
                                             onClick={submitComment}
                                             edge="end"
