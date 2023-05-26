@@ -22,7 +22,8 @@ const Take = ({
     openReply,
     itemId,
     threadType,
-    onSubmit
+    onSubmit,
+    topLevel
 }) => {
     const [text, setText] = useState("");
     const [mediaRating, setMediaRating] = useState(0);
@@ -45,6 +46,7 @@ const Take = ({
             })
             if (onSubmit) {
                 setText("");
+                setMediaRating(0);
                 await onSubmit();
             }
         } catch (err) {
@@ -73,16 +75,18 @@ const Take = ({
                                     <div
                                         className={styles.sendButton}
                                     >
-                                        <div style={{color: '#929180'}}>
-                                            Rate it?
-                                        </div>
-                                        <div style={{paddingBottom: '6px', paddingLeft: '6px'}}>
-                                            <StarRating
-                                                //details={details}
-                                                type="take"
-                                                setRating={setMediaRating}
-                                            />
-                                        </div>
+                                        {topLevel && <div>
+                                            <div style={{color: '#929180'}}>
+                                                Rate it?
+                                            </div>
+                                            <div style={{paddingBottom: '6px', paddingLeft: '6px'}}>
+                                                <StarRating
+                                                    //details={details}
+                                                    type="take"
+                                                    setRating={setMediaRating}
+                                                />
+                                            </div>
+                                        </div>}
                                         <IconButton
                                             onClick={submitComment}
                                             edge="end"
