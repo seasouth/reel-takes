@@ -27,6 +27,7 @@ export const getServerSideProps = async ({ params }) => {
             commenter: true,
             numratings: true,
             rating: true,
+            mediarating: true,
             threadid: true,
             parentid: true
         }
@@ -141,6 +142,7 @@ const Takes = ({
                     itemId={itemid}
                     threadType={mediatype}
                     onSubmit={updateComments}
+                    topLevel={true}
                 />
                 {
                     comments.map((comment) =>
