@@ -12,7 +12,7 @@ const Search = styled('div')(({ theme }) => ({
     borderRadius: '8px',
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     transition: theme.transitions.create('width'),
-    width: '30%',
+    width: '40%',
     '&:focus-within': {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
       transition: theme.transitions.create('width'),
