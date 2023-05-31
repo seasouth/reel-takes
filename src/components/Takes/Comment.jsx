@@ -12,7 +12,8 @@ const Comment = ({
     commentText,
     itemid,
     threadtype,
-    updateComments
+    updateComments,
+    updateRating
 }) => {
     const [replyToOpen, setReplyToOpen] = useState(false);
     const msg = " gives it a ";
@@ -69,7 +70,7 @@ const Comment = ({
                     <div className={styles.commentMenu}>
                         <StarRating 
                             details={details}
-                            updateComments={updateComments}
+                            updateRating={updateRating}
                             type="comment"
                         />
                         <Button

@@ -5,15 +5,12 @@ import StarIcon from '@mui/icons-material/Star';
 
 export default function StarRating({
   details,
-  updateComments,
+  updateRating,
   type,
+  rating,
   setRating
 }) {
-  const [value, setValue] = useState(0);
-  const [hover, setHover] = useState(-1);
-
   const handleChange = async (e, nv) => {
-    setValue(nv);
     if (setRating) {
       setRating(nv);
     }
@@ -29,8 +26,8 @@ export default function StarRating({
       })
     }
 
-    if (updateComments) {
-      await updateComments();
+    if (updateRating) {
+      await updateRating();
     }
   }
 
@@ -40,7 +37,7 @@ export default function StarRating({
     } else if (type === 'media') {
       return details.mediarating;
     } else if (type === 'take') {
-      return value;
+      return rating;
     }
   }
 
@@ -60,9 +57,6 @@ export default function StarRating({
         precision={0.5}
         size="xsmall"
         onChange={handleChange}
-        onChangeActive={(event, newHover) => {
-          setHover(newHover);
-        }}
         //emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
       />
     </Box>
