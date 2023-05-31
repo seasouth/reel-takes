@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
+import ButtonBase from '@mui/material/ButtonBase';
 import SendIcon from '@mui/icons-material/Send';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
@@ -75,34 +76,31 @@ const Take = ({
                                     <div
                                         className={styles.sendButton}
                                     >
-                                        {topLevel && <div>
-                                            <div style={{color: '#929180'}}>
-                                                Rate it?
-                                            </div>
-                                            <div style={{paddingBottom: '6px', paddingLeft: '6px'}}>
-                                                <StarRating
-                                                    //details={details}
-                                                    type="take"
-                                                    setRating={setMediaRating}
-                                                />
-                                            </div>
-                                        </div>}
                                         <IconButton
                                             onClick={submitComment}
                                             edge="end"
                                         >
-                                            <Avatar
-                                                sx={{ width: 32, height: 32 }}
-                                            >
-                                                <SendIcon
-                                                    color="primary"
-                                                />
-                                            </Avatar>
+                                            <SendIcon
+                                                sx={{color: 'whitesmoke', paddingBottom: '4px'}}
+                                            />
                                         </IconButton>
                                     </div>
                                 </InputAdornment>
                         }}
                     />
+                </div>
+                <div style={{display: 'flex', paddingTop: '6px', position: 'absolute', right: 0, paddingRight: '2rem'}}>
+                    <div style={{display: 'flex', color: 'whitesmoke', paddingTop: '2px'}}>
+                        Rate it?
+                    </div>
+                    <div style={{paddingBottom: '6px', paddingLeft: '6px'}}>
+                        <StarRating
+                            //details={details}
+                            type="take"
+                            rating={mediaRating}
+                            setRating={setMediaRating}
+                        />
+                    </div>
                 </div>
             </div> : 
             <></>

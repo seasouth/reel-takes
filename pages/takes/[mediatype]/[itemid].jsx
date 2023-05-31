@@ -84,6 +84,12 @@ const Takes = ({
         setComments(orderComments(await updatedComments));
     }
 
+    const updateRating = async () => {
+        const retValue = await fetch(`/api/get/comment/${mediatype}/${itemid}`)
+        const updatedComments = retValue.json();
+        setComments(await updatedComments);
+    }
+
     const orderComments = (list) => {
         let orderedComments = [];
         const nestedOrderComments = (nestedList, indentations) => {
@@ -144,6 +150,7 @@ const Takes = ({
                     onSubmit={updateComments}
                     topLevel={true}
                 />
+                <div style={{paddingTop: '1.5rem'}}>
                 {
                     comments.map((comment) =>
                     <Comment
@@ -155,9 +162,11 @@ const Takes = ({
                         itemid={itemid}
                         threadtype={mediatype}
                         updateComments={updateComments}
+                        updateRating={updateRating}
                     />
                     )
                 }
+                </div>
             </div>
         </div>
     )
