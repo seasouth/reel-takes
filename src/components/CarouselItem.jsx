@@ -52,10 +52,11 @@ const CarouselItem = ({
         async function fetchData() {
             const retValue = await fetch(`/api/get/comment/${item.media_type}/${item.id}`);
             const updatedComments = await retValue.json();
+            const filteredComments = updatedComments.filter(comment => comment.mediarating !== 0);
 
             if (updatedComments.length > 0) {
                 setLength(updatedComments.length);
-                const avgRating = updatedComments.reduce((a, b) => a + b.mediarating, 0) / updatedComments.length;
+                const avgRating = filteredComments.reduce((a, b) => a + b.mediarating, 0) / filteredComments.length;
                 setAvgRating(avgRating);
             }
         }
