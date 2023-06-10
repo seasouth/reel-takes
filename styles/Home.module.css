@@ -50,11 +50,24 @@
   background-color: black;
 }
 
+.appFooter {
+  display: flex;
+  justify-content: center;
+}
+
+.tmdbDisclaimer {
+  color: whitesmoke;
+  opacity: 0.55;
+  font-family: Bodoni MT, serif;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
 .swiperTitle {
   margin-left: 1rem;
   margin-top: 2rem;
   text-align: left;
-  color: white;
+  color: whitesmoke;
   font-family: Bodoni MT, serif;
 }
 
