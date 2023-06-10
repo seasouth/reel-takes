@@ -38,7 +38,7 @@ const HomePage = () => {
                 :
                 <>
                     <Carousel
-                        title={'Active'}
+                        title={'Latest'}
                         type={'active'}
                     />
                     <hr />
