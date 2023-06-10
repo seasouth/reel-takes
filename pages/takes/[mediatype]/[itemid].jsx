@@ -41,7 +41,6 @@ const Takes = ({
     const [replyToOpen, setReplyToOpen] = useState(false);
     const [comments, setComments] = useState([]);
     const [logo, setLogo] = useState("");
-    const [scrollPosition, setScrollPosition] = useState(0);
 
     const imageRef = useRef(null);
     const contentRef = useRef(null);
