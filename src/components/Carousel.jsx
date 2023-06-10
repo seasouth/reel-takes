@@ -10,12 +10,25 @@ import "swiper/css/navigation";
 
 const Carousel = ({
     title,
+    type,
     tmdbQuery,
     queryParams
 }) => {
     const navigate = useRouter();
 
     const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            const retValue = await fetch(`/api/get/comment/active`);
+            const results = await retValue.json();
+            setItems(results);
+        }
+
+        if (type === 'active') {
+            fetchData();
+        }
+    }, []);
 
     useEffect(() => {
         if (tmdbQuery?.length > 0) {

@@ -18,8 +18,9 @@ const HomePage = () => {
                     />
                     <br />
                     <footer>
+                        <br />
                         <div>
-                            Film data from 
+                            This product uses
                         </div>
                         <Image
                             src="/blue_long_TMDB.svg"
@@ -28,10 +29,19 @@ const HomePage = () => {
                             height={24}
                             priority
                         />
+                        <div>
+                            API but is not endorsed or certified by TMDB.
+                        </div>
+                        <br />
                     </footer>
-                </ React.Fragment>
+                </React.Fragment>
                 :
                 <>
+                    <Carousel
+                        title={'Active'}
+                        type={'active'}
+                    />
+                    <hr />
                     <Carousel 
                         title={'Trending'}
                         tmdbQuery={'trending/all/week'}
@@ -48,8 +58,9 @@ const HomePage = () => {
                     />
                     <br />
                     <footer>
+                        <br />
                         <div>
-                            Film data from 
+                            This product uses
                         </div>
                         <Image
                             src="/blue_long_TMDB.svg"
@@ -58,6 +69,10 @@ const HomePage = () => {
                             height={24}
                             priority
                         />
+                        <div>
+                            API but is not endorsed or certified by TMDB.
+                        </div>
+                        <br />
                     </footer>
                 </>
         }</>
