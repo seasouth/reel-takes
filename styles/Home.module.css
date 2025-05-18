@@ -336,7 +336,7 @@
     background: linear-gradient(
       to bottom,
       transparent 0%,
-      rgb(var(--background-end-rgb)) 40%
+      rgb(var(--background-end-rgb)) 90%
     );
     z-index: 1;
   }
